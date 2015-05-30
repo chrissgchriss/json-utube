@@ -4,18 +4,21 @@
 <head>
     <title>Json Testing</title>
 </head>
-<script>
-    var obj1 = { user:"John", age:22, country:"United States" };
+<script type="text/javascript">
+    var obj1 = { user:"John", age:22, country:"United States"};
     var obj2 = { user:"Will", age:27, country:"United Kingdom" };
     var obj3 = { user:"Abiel", age:19, country:"Mexico" };
-    var obj4 = { ul:obj1, u2:obj2, u3:obj3 };
-    document.write( obj1.user );
+    var obj4 = { u1:obj1, u2:obj2, u3:obj3 };
+    document.write(obj3.user+" is age: "+obj3.age+" and is from: "+obj3.country+".");
+    obj3.country = "Italy";
+    document.write("<hr />");
+    document.write(obj3.user+" is age: "+obj3.age+" and is from: "+obj3.country+".");
 </script>
 <body>
 <!-- retrieve Database information, return it to Javascript application as JSON encoded format -->
 <!-- but first, make JSON -->
 <!-- learning to parse JSON data and create JSON objects -->
-
+<p>This is now a branch named test-add-more</p>
 
 </body>
 </html>
