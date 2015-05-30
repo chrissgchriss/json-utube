@@ -8,17 +8,23 @@
     var obj1 = { user:"John", age:22, country:"United States"};
     var obj2 = { user:"Will", age:27, country:"United Kingdom" };
     var obj3 = { user:"Abiel", age:19, country:"Mexico" };
+    
     var obj4 = { u1:obj1, u2:obj2, u3:obj3 };
+    
     document.write(obj3.user+" is age: "+obj3.age+" and is from: "+obj3.country+".");
     obj3.country = "Italy";
     document.write("<hr />");
     document.write(obj3.user+" is age: "+obj3.age+" and is from: "+obj3.country+".");
+    document.write("<hr />");
+    document.write(obj4.u2.user+" going into multidementional array, he is age "+obj4.u2.age );
+    document.write("<hr />");
+    document.write(obj4["u2"]["user"] + "'s age: " + obj4["u2"]["age"] +"using [ ] instead of .(dot) notation.");
 </script>
 <body>
 <!-- retrieve Database information, return it to Javascript application as JSON encoded format -->
 <!-- but first, make JSON -->
 <!-- learning to parse JSON data and create JSON objects -->
-<p>This is now a branch named test-add-more</p>
+<p style="margin-top: 100px;">This is now a branch named test-add-more</p>
 
 </body>
 </html>
