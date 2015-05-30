@@ -4,7 +4,22 @@
 <head>
     <title>Json Testing</title>
 </head>
-
+<script type="text/javascript">
+    // make a json object
+    var obj1 = { user:"Will", age:25, location:"United States"};
+    var obj2 = { user:"Granville", age:45, location:"Las Vegas"};
+    var obj3 = { user: "Addison", age:35, location:"Texas"};
+    
+    // create multidimentional array
+    var obj4 = { p1:obj1, p2:obj2, p3:obj3 };
+    
+    // print to screen, concactinate, change values and alternate block vs. object notation
+    document.write("Hello " + obj1.user + " you are age: " + obj1.age +" and live in the "+ obj1.location +"." );
+    // change the location
+    obj1.location = "China";
+    document.write("<hr />");
+    document.write("Hello " + obj1.user + " you are age: " + obj1.age +" and NOW live in the "+ obj1.location +"!!!" );
+</script>
 <body>
 <!-- retrieve Database information, return it to Javascript application as JSON encoded format -->
 <!-- but first, make JSON -->
