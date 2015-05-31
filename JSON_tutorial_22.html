@@ -1,42 +1,30 @@
 <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <title>json</title>
+            <script type="text/javascript">
+                function ajax_get_json() {
+                var hr = new XMLHttpRequest();
+                hr.open("GET", "mylist.json", true);
+                hr.setRequestHeader("Content-type","application/json", true);
+                hr.onreadystatechange = function() {
+                    if (hr.readyState == 4 && hr.status == 200) {
+                        var data = JSON.parse(hr.responseText);
+                        var results = document.getElementById("results");
+                        results.innerHTML = data.u3.user;
+                        
+                    }
+                }
+                hr.send(null);
+                results.innerHTML = "requesting data...";
+                }
+            </script>
+        </head>
+        <body>
+            <!-- result filled by innerHTML script -->
+            <div id="results"></div>
+            <script type="text/javascript">ajax_get_json();</script>
+        </body>
+    </html>
 
-<html>
-<head>
-    <title>Json Testing tutorial 2</title>
-</head>
-<script type="text/javascript">
-function ajax_get_json() {
-    // start off with variables for function
-    var hr = new XMLHttpRequest();
-    
-    hr.open("GET","mylist.json", true);
-    hr.setRequestHeader("Content-type","application/json", true);
-    
-    hr.onreadystatechange = function() {
-        if (hr.readyState == 4 && hr.status == 200) {
-            //to get it ready for json
-            var data = JSON.parse(hr.responseText);
-            var results = document.getElementById("results");
-            // write results one at a time, then do it as a loop...
-            results.innerHTML = "";
-            results.innerHTML += data.u1.user + " is age: " + data.u1.age + " and from: " + data.u1.country +"<br />";
-            results.innerHTML += data.u3.user + " is age: " + data.u3.age + " and from: " + data.u3.country +"<br />";
-            // a loop
-            for (var obj in data) {
-                results.innerHTML += data[obj].user+ " is in my list <br />"
-            }
-            
-        }
-    }
-    hr.send(null);
-    //document.getElementById("results").innerHTML = "processing some monkey code ...";
-    //because we created a var results = document.getElementByID("results"), we can refer it by the var
-    results.innerHTML = "processing some monkey monkey code!!!";
-}
-</script>
-<body>
-<p style="margin-top: 100px;">This is now a branch named tutorial2-myself</p>
-<div id="results"></div>
-<script type="text/javascript">ajax_get_json();</script>
-</body>
-</html>
