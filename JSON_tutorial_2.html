@@ -2,37 +2,37 @@
 
 <html>
 <head>
-    <title>Json Testing</title>
+    <title>Json Testing tutorial 2</title>
 </head>
 <script type="text/javascript">
 function ajax_get_json() {
     // always start off with your variables for the function
     var hr = new XMLHttpRequest();
-    var results = document.getElementByID("results");
+    //var results = document.getElementByID("results");
     
-    hr.open("GET","mylist.json",true);
-    hr.setRequestHeader("Content-type","application/json",true);
+    hr.open("GET","mylist.json", true);
+    hr.setRequestHeader("Content-type","application/json", true);
     hr.onreadystatechange = function() {
         if (hr.readyState == 4 && hr.status == 200) {
             //var return_data
             //var data = hr.responseText;
             //to get it ready for json
             var data = JSON.parse(hr.responseText);
-            // get data from mylist.json and put in div
+            var results = document.getElementById("results");
             results.innerHTML = data.user;
         }
     }
     hr.send(null);
     //document.getElementById("results").innerHTML = "processing some monkey code ...";
     //because we created a var results = document.getElementByID("results"), we can refer it by the var
-    results.innerHTML = "processing some monkey monkey code!!!"
+    results.innerHTML = "processing some monkey monkey code!!!";
 }
 </script>
 <body>
 <!-- retrieve Database information, return it to Javascript application as JSON encoded format -->
 <!-- but first, make JSON -->
 <!-- learning to parse JSON data and create JSON objects -->
-<p style="margin-top: 100px;">This is now a branch named tutorial2</p>
+<p style="margin-top: 100px;">This is now a branch named tutorial222</p>
 <div id="results"></div>
 <script type="text/javascript">ajax_get_json();</script>
 </body>
