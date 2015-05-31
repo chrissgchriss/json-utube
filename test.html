@@ -5,7 +5,7 @@
     <title>Json Testing</title>
 </head>
 <script type="text/javascript">
-    // make a json object
+    // make a json object - which is key value pair in an array
     var obj1 = { user:"Will", age:25, location:"United States"};
     var obj2 = { user:"Granville", age:45, location:"Las Vegas"};
     var obj3 = { user: "Addison", age:35, location:"Texas"};
@@ -19,6 +19,27 @@
     obj1.location = "China";
     document.write("<hr />");
     document.write("Hello " + obj1.user + " you are age: " + obj1.age +" and NOW live in the "+ obj1.location +"!!!" );
+    // write alternate block quote vs object notation
+    document.write("<hr />");
+    document.write(obj2["user"]+" is age: "+obj2["age"]);
+    // using the multidimentional array
+    document.write("<hr />");
+    document.write(obj4.p2.location);
+    document.write("<hr />");
+    document.write(obj4["p3"]["user"]);
+    // block quotes look more like arrays which we will now create meats and fruit
+    // this is just an array not like JSON objects, which are key value pairs
+    // index paths: 0,1,2 - because there is no KEY to access the value!
+    var meats = ["beef","pork","chicken"];
+    var fruit = ["orange","grapes","apples"];
+    document.write("<hr />");
+    document.write(fruit[1]);
+    // create a json object with an regular array
+    var obj5 = { arr1:meats, arr2:fruit };
+    // only way to access value is through index path as opposed to KEY via JSON
+    document.write("<hr />");
+    document.write(obj5.arr2[2]);
+    
 </script>
 <body>
 <!-- retrieve Database information, return it to Javascript application as JSON encoded format -->
