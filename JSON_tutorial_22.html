@@ -6,20 +6,26 @@
 </head>
 <script type="text/javascript">
 function ajax_get_json() {
-    // always start off with your variables for the function
+    // start off with variables for function
     var hr = new XMLHttpRequest();
-    //var results = document.getElementByID("results");
     
     hr.open("GET","mylist.json", true);
     hr.setRequestHeader("Content-type","application/json", true);
+    
     hr.onreadystatechange = function() {
         if (hr.readyState == 4 && hr.status == 200) {
-            //var return_data
-            //var data = hr.responseText;
             //to get it ready for json
             var data = JSON.parse(hr.responseText);
             var results = document.getElementById("results");
-            results.innerHTML = data.u3.user + " is age: " + data.u3.age + " and from: " + data.u3.country;
+            // write results one at a time, then do it as a loop...
+            results.innerHTML = "";
+            results.innerHTML += data.u1.user + " is age: " + data.u1.age + " and from: " + data.u1.country +"<br />";
+            results.innerHTML += data.u3.user + " is age: " + data.u3.age + " and from: " + data.u3.country +"<br />";
+            // a loop
+            for (var obj in data) {
+                results.innerHTML += data[obj].user+ " is in my list <br />"
+            }
+            
         }
     }
     hr.send(null);
@@ -29,9 +35,6 @@ function ajax_get_json() {
 }
 </script>
 <body>
-<!-- retrieve Database information, return it to Javascript application as JSON encoded format -->
-<!-- but first, make JSON -->
-<!-- learning to parse JSON data and create JSON objects -->
 <p style="margin-top: 100px;">This is now a branch named tutorial2-myself</p>
 <div id="results"></div>
 <script type="text/javascript">ajax_get_json();</script>
