@@ -6,7 +6,7 @@
                 <script type="text/javascript">
                     function ajax_get_json() {
                         var hr = new XMLHttpRequest();
-                        hr.open( "GET", "mylist.json", true );
+                        hr.open( "GET", "my_json_list.php", true );
                         hr.setRequestHeader( "Content-type", "application/json", true );
                         hr.onreadystatechange = function() {
                             if ( hr.readyState == 4 && hr.status == 200 ) {
@@ -14,7 +14,7 @@
                                 var results = document.getElementById("results");
                                 results.innerHTML = "";
                                 for( var obj in data ) {
-                                    results.innerHTML += data[obj].user + "is in my list <br>";
+                                    results.innerHTML += data[obj].user + "is " + data[obj].age + " and is from " + data[obj].country + " <br>";
                                 }
                             }
                         }
@@ -24,6 +24,7 @@
                 </script>
         </head>
         <body>
+            <!-- now getting results from a php file as opposed to a .json file -->
             <div id="results"></div>
             <script type="text/javascript">ajax_get_json();</script>
         </body>
