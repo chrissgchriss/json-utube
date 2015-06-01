@@ -1,16 +1,15 @@
 <?php
 // make sure application knows it is json data not php
 header("Content-Type: application/json");
+// we are sending (static variables) via POST birds and bees - var1=birds&var2=bees
+$var1 = $_POST["var1"]; // birds
+$var2 = $_POST["var2"]; // bees
+// create a json object with one object inside - same as you were doing with mylist...
+// now it is putting what was in POST[] into json object - which are key value pairs not just arrays...
 $jsonData = '{
-    "u1":{"user":"John", "age":22, "country":"phpUnited States"},
-    "u2":{"user":"Will", "age":27, "country":"phpUnited Kingdom"},
-    "u3":{"user":"Abiel", "age":19, "country":"phpMixico"},
-    "u4":{"user":"Kirk", "age":30, "country":"phpUtah"},
-    "u5":{"user":"Jessus", "age":31, "country":"China"},
-    "u6":{"user":"Markie Mark", "age":8, "country":"Iran"},
-    "u7":{"user":"MonkeyMan", "age":12, "country":"thailand"},
-    "u8":{"user":"Frodo", "age":18, "country":"Hobbit"},
-    "u9":{"user":"machineman", "age":62, "country":"Canada"}
+
+"obj1":{"propertyA":"'.$var1.'" , "propertyB":"'.$var2.'"}
+
 }';
 echo $jsonData;
 ?>
