@@ -1,42 +1,29 @@
 <!DOCTYPE html>
     <html>
         <head>
-            <title>ajax get json</title>
-                <meta charset="utf-8" />
-                <script type="text/javascript">
-                    function ajax_get_json() {
-                        var hr = new XMLHttpRequest();
-                        // use POST and json_decode() and json_encode()
-                        //hr.open( "GET", "my_json_list.php", true );
-                        hr.open( "POST", "my_json_list.php", true);
-                        //hr.setRequestHeader( "Content-type", "application/json");
-                        hr.setRequestHeader( "Content-type", "application/x-www-form-urlencoded");
-                        hr.onreadystatechange = function() {
-                            if ( hr.readyState == 4 && hr.status == 200 ) {
-                                var data = JSON.parse(hr.responseText);
-                                var results = document.getElementById("results");
-                                results.innerHTML = "";
-                                for( var obj in data ) {
-                                    //results.innerHTML += data[obj].user + " is " + data[obj].age + " and is from " + data[obj].country + " <br>";
-                                    // we are POSTing to the php file and sending back DYNAMIC data to this page...
-                                    results.innerHTML += "Property A:" + data[obj].propertyA + " <hr>";
-                                    results.innerHTML += "Property B:" + data[obj].propertyB;
-                                }
+            <title>Encode json dynamicly</title>
+            <script type="text/javascript">
+                function ajax_get_json() {
+                    var results = document.getElementById("results");
+                    var hp = new XMLHttpRequest();
+                    hp.open( "POST","my_json_list.php", true);
+                    hp.setRequestHeader( "Content-type","application/x-www-form-urlencoded" );
+                    hp.onreadystatechange = function() {
+                        if (hp.readyState == 4 && hp.status == 200 ) {
+                            var data = JSON.parse(hp.responseText);
+                            results.innerHTML = "";
+                            for ( var obj in data ) {
+                                results.innerHTML += "Property A: " + data[obj].propertyA + "<hr />";
+                                results.innerHTML += "Property B: " + data[obj].propertyB;
                             }
                         }
-                        // will post variables in send method
-                        //hr.send(null);
-                        hr.send("var1=birds&var2=bees");
-                        results.innerHTML = "requesting data...";
                     }
-                </script>
+                    hp.send("var1=birds&var2=bees");
+                    results.innerHTML = "requesting da data";
+                }
+            </script>
         </head>
         <body>
-            <!-- now getting results from a php file as opposed to a .json file -->
-            <p>We are using json encoding to send dynamic info user posted<br>
-            json_decode PHP function converts JSON data into PHP array data<br>
-            it takes JSON an turns it into an associate - array for PHP to use JSON is key value PHP is ASSOC_ARRAY
-            json_encode is a PHP function which converts PHP array into a JSON object</p>
             <div id="results"></div>
             <script type="text/javascript">ajax_get_json();</script>
         </body>

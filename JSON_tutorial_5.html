@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Encode json dynamicly</title>
+
+            <style>
+body { margin:0px; background:#000; color:#CCC; }
+div#pagetop { position:fixed; background: #333; padding:20px; font-size:36px; width:100%; border-bottom:#000 1px solid; }
+div#thumbnailbox { float:left; margin-top:82px; width:120px; background:#292929; }
+div#thumbnailbox > div { width:100px; height:80px; overflow:hidden; margin:10px; cursor:pointer; }
+div#thumbnailbox > div > img { width:100px; }
+div#pictureframe { position:fixed; left:140px; top:100px; width:700px; height:500px; }
+</style>
+
+
+            //only thing new here is putting placing an argument in the functoin
+            <script type="text/javascript">
+                function ajax_json_gallery(folder) { // folder is the value sent by gallery1 - match in send method
+                    document.getElementById("pagetop").innerHTML = "Dynamic JSON Ajax PHP Driven Image Gallery";
+                    var thumbnailbox = document.getElementById("thumbnailbox");
+                    var pictureframe = document.getElementById("pictureframe");
+                    var hp = new XMLHttpRequest();
+                    hp.open( "POST","json_gallery_data.php", true);
+                    hp.setRequestHeader( "Content-type","application/x-www-form-urlencoded" );
+                    hp.onreadystatechange = function() {
+                        if (hp.readyState == 4 && hp.status == 200 ) {
+                            var d = JSON.parse(hp.responseText);
+                            // make the first large picture show up on its own
+                            pictureframe.innerHTML = "<img src='"+d.img1.src+"' />";
+                            thumbnailbox.innerHTML = "";
+                            for( var o in d ) {
+                                if (d[o].src) { // if data object d[o]has a .srcsource
+                                    thumbnailbox.innerHTML += '<div onclick="putinframe(\''+d|[o].src+'\')"><img src="'+d[o].src+'"</div>';
+                                }
+                            }
+                        }
+                    }
+                    //hp.send("var1=birds&var2=bees");
+                    hp.send("folder=+folder");// this is now a dynamic variable, whatever folder contains
+                    thumbnailbox.innerHTML = "requesting da data";
+                }
+                function putinframe(src){ // this function loads the larger picture by taking the .src and manipulating the img tags
+                    var pictureframe = document.getElementById("pictureframe");
+                    pictureframe.innerHTML = '<img src="'+src+'"';
+                }
+                
+            </script>
+        </head>
+        <body>
+            <div id="pagetop"></div>
+            <div id="thumbnailbox"></div>
+            <div id="pictureframe"></div>
+            <script type="text/javascript">ajax_json_gallery('gallery1');</script>
+        </body>
+    </html>
