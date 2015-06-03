@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>ajax json php image gallery</title>
+            <style>
+                body {margin: 0 auto; background:#000; color:#CCC}
+                div#pagetop {
+                    position: fixed; background: #333; padding: 20px; font-size: 36px; width: 100%; border-bottom:#000 1px solid;
+                }
+                div#thumbnailbox {float:left; margin-top: 82px; width: 120px; background:#292929;}
+                div#thumbnailbox > div {width:100px; height:80px; overflow:hidden; margin:10px cursor:pointer;}
+                div#thumbnailbox > div > img {width:100px;}
+                div#pictureframe {position:fixed; left:140px; top:100px; width:700px; text-align:center; }
+                div#albummenubox {position: fixed; left:856px; top:100px; width:200px; background:#CCC;
+                padding:12px; color:#000; border-radius: 10px;}
+            </style>
+            <script>
+                function ajax_json_gallery(folder){
+                    //document.getElementById("pagetop").innerHTML="Dynamic JSON Ajax PHP Driven Image Gallery";
+                    var thumbnailbox = document.getElementById("thumbnailbox");
+                    var pictureframe = document.getElementById(pictureframe);
+                    
+                    var hp = new XMLHttpRequest();
+                    hp.open("POST","json_gallery_data6a.php", true);
+                    hp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    hp.onreadystatechange = function() {
+                        if (hp.readyState == 4 && hp.status == 200) {
+                            var d = JSON.parse(hp.responseText);
+                            // use d
+                            pictureframe.innerHTML = "<img src='+d.img1.src+'>";
+                            thumbnailbox.innerHTML = "";
+                            for (var o in d) {
+                                if (d[o].src) {
+                                    thumbnailbox.innerHTML += '';
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            </script>
+        </head>
+        <body>
+            <div id="pagetop">Dynamic JSON Ajax PHP Driven Image Gallery</div>
+            <div id="thumbnailbox"></div>
+            <div id="pictureframe"></div>
+            <div id="albummenubox"></div>
+            <script type="text/javascript">ajax_json_gallery('gallery1');</script>
+        </body>
+    </html>
