@@ -1,5 +1,27 @@
 <?php
 header("Content-Type: application/json");
+$folder = $_POST["folder"];
+$jsonData = '{';
+$dir = $folder,"/";
+$dirHandle = opendir($dir); 
+$i = 0;
+while ($file = readdir($dirHandle)) {
+	if(!is_dir($file) && strpos($file, '.JPG')){
+		$i++;
+		$src = "$dir$file";
+$jsonData .= '"img'.$i.'":{ "num":"'.$i.'","src":"'.$src.'", "name":"'.$file.'" },';
+    }
+}
+closedir($dirHandle);
+$jsonData = chop($jsonData, ",");
+$jsonData .= '}';
+echo $jsonData;
+?>
+
+
+
+<?php
+header("Content-Type: application/json");
 $folder = $_POST["folder"]; // this becomes gallery1
 $jsonData = '{'; // will be used later as the first character of a compounding remember the mylist.json file { } ?
 $dir = $folder,"/"; // gallery1/
@@ -30,4 +52,50 @@ echo $jsonData;
     "img4":{"num":"4",   "src":"gallery1/killerbees.jpg",     "name":"killerbees.jpg" }
     
 }
+?>
+
+
+//6/1/2015
+<?php
+header("Content-Type: application/json");//header
+$folder = $_POST['folder'];// get post info
+$jsonData = '{'; // put in first bracket
+$dir = $folder,"/"; // want directory gallery+/file.JPG aka gallery1/IMG_1447.JPG
+$dirhandle = opendir($dir); // open the directory, read contents, close it - like mysqli_fetch_array(ASSOC_ARRRAY)
+$i = 0; // start variable for look at zero
+while( $file = readdir($dirhandle)){ // do while loop
+    if(!is_dir($file) && strpos($file, '.JPG')){ // if not a folder and is a JPG
+        $1++; // make loop increment
+        $src=$dir+$file // finally...put directory and file together
+             //"img   1  ":{"num":"  1    ",   "src":"gallery1/eyesclosed3.jpg",    "name":"eyesclosed3.jpg" },
+$jsonData .= '"img'   .$i.   '":{"num":"'   .$i.   '","src":"'   .$src.   '"},';// middle of jsonData
+    }
+}
+closedir($dirHandle); // just like mysqli_close
+$jsonData = chop($jsonData, ","); // take out last comma
+$jsonData .= '}'; // put in final ends
+// print to screen
+?>
+
+
+//6/2/2015
+<?php
+header("Content-Type: application/json"); 
+$folder = $_POST['folder'];
+$jsonData = '{'; 
+$dir = $folder."/";
+$dirHandle = opendir($dir); // this puts everything into $dirHandle
+$i=0;
+while ( $file = readdir($dirHandle)) { // this puts everything in $file
+    if( !is_dir($file) && strpos($file, '.JPG')){ 
+        $i++;
+        //1. forgot to create a junk variable to put directory and file together aka gallery1/IMG_1447.JPG
+        $src = "$dir$file";
+        $jsonData = '"img' .$i. '":{num":"' .$i. '", "src":"' .$src. '",}'
+    }
+}    
+closedir($dirHandle); //2. because $dir is inside $dirHandle 
+$jsonData = trim($jsonData, "," );
+$jsonData .= '};'
+echo $jsonData;         
 ?>
