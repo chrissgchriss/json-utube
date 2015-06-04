@@ -1,57 +1,50 @@
 <!DOCTYPE html>
-<html>
-<head>
-<style>
-body { margin:0px; background:#000; color:#CCC; }
-div#pagetop { position:fixed; background: #333; padding:20px; font-size:36px; width:100%; border-bottom:#000 1px solid; }
-div#thumbnailbox { float:left; margin-top:82px; width:120px; background:#292929; }
-div#thumbnailbox > div { width:100px; height:80px; overflow:hidden; margin:10px; cursor:pointer; }
-div#thumbnailbox > div > img { width:100px; }
-/*div#pictureframe { position:fixed; left:140px; top:100px; width:700px; height:500px; }*/
-div#pictureframe { position:fixed; left:140px; top:100px; width:700px; text-align:center; }
-div#pictureframe > img { max-width:700px; }
-div#albummenubox {position:fixed; left:856px; top:100px; width:200px; background:#CCC; padding:12px; color:#000;
-border-radius:10px; }
-</style>
-<script>
-function ajax_json_gallery(folder){
-	//document.getElementById("pagetop").innerHTML = "Dynamic JSON Ajax PHP Driven Image Gallery";
-	var thumbnailbox = document.getElementById("thumbnailbox");
-	var pictureframe = document.getElementById("pictureframe");
-    var hr = new XMLHttpRequest();
-    hr.open("POST", "json_gallery_data.php", true);
-    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    hr.onreadystatechange = function() {
-	    if(hr.readyState == 4 && hr.status == 200) {
-		    var d = JSON.parse(hr.responseText);
-			pictureframe.innerHTML = "<img src='"+d.img1.src+"'>";
-			thumbnailbox.innerHTML = "";
-			for(var o in d){
-				if(d[o].src){
-				    thumbnailbox.innerHTML += '<div onclick="putinframe(\''+d[o].src+'\')"><img src="'+d[o].src+'"></div>';
-				}
-			}
-	    }
-    }
-    hr.send("folder="+folder);
-    thumbnailbox.innerHTML = "requesting...";
-}
-function putinframe(src){
-	var pictureframe = document.getElementById("pictureframe");
-	pictureframe.innerHTML = '<img src="'+src+'">';
-}
-</script>
-</head>
-<body>
-<div id="pagetop">Dynamic JSON Ajax PHP Driven Image Gallery</div>
-<div id="thumbnailbox"></div>
-<div id="pictureframe"></div>
-<div id="albummenubox">
-    <h3>My Photo Albums</h3>
-    <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery1')">Gallery 1</a><br>
-    <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery2')">Gallery 2</a><br>
-    <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery3')">Gallery 3</a><br>
-</div>
-<script type="text/javascript">ajax_json_gallery('gallery1');</script>
-</body>
-</html>
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <title>Ajax json data from mysql database</title>
+            <style>
+                div#databox {
+                    width: 530px;
+                    height: 320px;
+                    border: thin solid grey;
+                    padding: 12px;
+                    background-color: grey;
+                }
+            </style>
+            <script type="text/javascript">
+                $myTimer;
+                function ajax_json_data() {
+                    var databox = document.getItemById("databox");
+                    var arbituarybox = document.getItemById("arbituarybox");
+                    var hp = new XMLHttpRequest();
+                    hp.open("POST","json_mysql_data", true);
+                    hp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    hp.onreadystatechange = function() {
+                        if (hp.readyState == 4 && hp.status == 200) {
+                            var d = JSON.parse(hr.responseText);
+                            // use d directly
+                                arbituarybox.innerHTML = '+d[object].returnstamp+'; // access d directly
+                                // iterate d through loop
+                                databox.innerHTML = "";
+                                for(object in d) { // use loop to iterate over d, so need for (o in d) ??????
+                                    if (d[object].title) {
+                                        databox.innerHTML += '<p><a href="blog.page?='+d[object].id+'">'+d[object].title+'</a><br>';
+                                        databox.innerHTML += ''+d[object].cd+'</p>';
+                                    }
+                                }
+                        }
+                    }
+                    hp.send("limit=4");
+                    mytimer = setTimeout('ajax_json_data()', 6000);   
+                }
+            </script>
+        </head>
+        <body>
+            <h2>Timed JSON Data Request Random Items Script</h2>
+            <div id="databox"></div>
+            <div id="arbituarybox"></div>
+            <script type="text/javascript">ajax_json_data();</script>
+        </body>
+    </html>
+        

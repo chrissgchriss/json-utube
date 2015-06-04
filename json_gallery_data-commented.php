@@ -99,3 +99,111 @@ $jsonData = trim($jsonData, "," );
 $jsonData .= '};'
 echo $jsonData;         
 ?>
+
+//6/3/2015
+<!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                div#databox {
+                    padding:12px;
+                    background-color: grey;
+                    border: thin solid grey;
+                    width: 550px; height: 310px;
+                }
+            </style>
+            <script>
+                var myTimer;
+                function ajax_json_data() {
+                    var databox  = document.getElementById("databox");
+                    var arbitrary = document.getElementById("arbitrary");
+                    var hr = new XMLHttpRequest();
+                    hr.open("POST", "json_mysql_data.php", true);
+                    hr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    hr.onreadystatechange = function(){
+                        if (hr.readystate == 4 && hr.status == 200) {
+                            var d = JSON.parse(hr.responseText); // we now have JSON.parse results php ARRAY file inside of d
+                            arbitrary.innerHTML = d.arbitrary.retuntime;
+                            databox.innerHTML = ""; // needs to be cleared everytime - brings back 4 RAND() LIMIT $limit info from  table...
+                            // the loop
+                            for( var article in d ) {  // put everything you have how in d parsed as json
+                                // "article1": { "id":"45rd", "title":"'.Star Trek.'", "cd":"'.December 11, 1987.'" },
+                                // "article2": { "id":"67yy", "title":"'.Nine To Five'", "cd":"'.3 7, 1988.'" },
+                                // "article3": { "id":"45pl", "title":"'.Monkey Max'", "cd":"'.6 11, 2015'" },
+                                // "article4": { "id":"85pl", "title":"'.Avengers'", "cd":"'.5 09, 2014'" },
+                                // "arbituary":{ "itemcount":"'.3.'", "returntime":"'.123458'" }
+                                //
+                                //
+                                // the filter if...
+                                // below filters it... gets 4 and puts 4 paragraphs into databox 
+                                if (d[article].title) { // how does it know if it is article or arbitrary gets all 4 cus has title...
+                                    databox.innerHTML += '<p><a href="page.php?id='+d[article].id+'">'+d[article].title+'</a><br>';
+                                    databox.innerHTML += ''+d[article].cd+'</p>';
+                                }
+                            }
+                            
+                        }
+                    }
+                    hr.send("limit=4");
+                    databox.innerHTML = "processing...";
+                    myTimer = setTimeout('ajax_json_data()',6000); // this will force script to start every six seconds    
+                }   
+            </script>
+        </head>
+        <body>
+            <h2>Timed JSON Data Request Random Items Script</h2>
+            <div id="databox"></div>
+            <div id="arbitrary"></div><!-- Array, then number from $i -->
+            <script>ajax_json_data();</script>
+        </body>
+    </html>
+    
+    
+ 5/3/2015 : 10:04   
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8" />
+            <title>Ajax json data from mysql database</title>
+            <style>
+                div#databox {
+                    width: 530px;
+                    height: 320px;
+                    border: thin solid grey;
+                    padding: 12px;
+                    background-color: grey;
+                }
+            </style>
+            <script type="text/javascript">
+                $myTimer;
+                function ajax_json_data() {
+                    var databox = document.getItemById("databox");
+                    var arbituarybox = document.getItemById("arbituarybox");
+                    var hp = new XMLHttpRequest();
+                    hp.open("POST","json_mysql_data", true);
+                    hp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                    hp.onreadystatechange = function() {
+                        if (hp.readyState == 4 && hp.status == 200) {
+                            var d = JSON.parse(hr.responseText);
+                                arbituarybox.innerHTML = '+d[object].returnstamp+'; // access d directly
+                                databox.innerHTML = "";
+                                for(object in d) { // use loop to iterate over d, so need for (o in d) ??????
+                                    if (d[object].title) {
+                                        databox.innerHTML += '<p><a href="blog.page?='+d[object].id+'">'+d[object].title+'</a><br>';
+                                        databox.innerHTML += ''+d[object].cd+'</p>';
+                                    }
+                                }
+                        }
+                    }
+                    hp.send("limit=4");
+                    mytimer = setTimeout('ajax_json_data()', 6000);   
+                }
+            </script>
+        </head>
+        <body>
+            <h2>Timed JSON Data Request Random Items Script</h2>
+            <div id="databox"></div>
+            <div id="arbituarybox"></div>
+            <script type="text/javascript">ajax_json_data();</script>
+        </body>
+    </html>
