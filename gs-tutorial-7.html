@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8" />
+<title>Lesson 7 Test</title>
 <style>
 div#databox {
 	padding:12px;
@@ -10,13 +12,22 @@ div#databox {
 	height:310px;
 }
 </style>
+
+        <!-- JavaScript at the bottom for fast page loading -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+        <!--<script src="js/plugins.js"></script>-->
+        <!--<script src="js/main.js"></script>-->
+
+
+
 <script>
 var myTimer;
 function ajax_json_data(){
 	var databox = document.getElementById("databox");
 	var arbitrarybox = document.getElementById("arbitrarybox");
     var hr = new XMLHttpRequest();
-    hr.open("POST", "json_mysql_data.php", true);
+    hr.open("POST", "gs-data.php", true);
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     hr.onreadystatechange = function() {
 	    if(hr.readyState == 4 && hr.status == 200) {
@@ -36,26 +47,10 @@ function ajax_json_data(){
 	myTimer = setTimeout('ajax_json_data()',6000);
 }
 </script>
+
 </head>
 <body>
 <h2>Timed JSON Data Request Random Items Script</h2>
-<?php
-require('../connect_db.php');
-$q = 'SELECT * FROM lesson7';
-$r = mysqli_query($dbc,$q);
-
-if($r) {
-    echo '<h1>Tables on the Lesson 7 Database</h1>';
-    while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)){
-        echo'<br>'.$row['id'].'____'.$row['title'].'___'.$row['cd'];
-    }
-    mysqli_free_result($r);
-    mysqli_close($dbc);
-}
-else{
-    echo '<p>'.mysqli_error($dbc).'</p>';
-}
-?>
 <div id="databox"></div>
 <div id="arbitrarybox"></div>
 <script>ajax_json_data();</script>

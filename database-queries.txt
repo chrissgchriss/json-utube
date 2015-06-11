@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS lesson7 (
+id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(40),
+cd DATETIME
+);
+
+INSERT INTO lesson7(title,cd)
+VALUES("Mad Max",NOW()),("ThumderDome",NOW()),("Star Wars",NOW()),("Enterprise",NOW()),
+("Wizard of Oz",NOW()),("Kill Bill",NOW()),("Jaws",NOW());
+
+
+
+DROP TABLE IF EXISTS lesson7;
+
+
+
+CREATE TABLE IF NOT EXISTS lesson7 (
+id INT,
+title VARCHAR(40),
+cd DATETIME
+);
+
+
+INSERT INTO lesson7(title,cd)
+VALUES("Mad Max",NOW()),("ThumderDome",NOW()),("Star Wars",NOW()),("Enterprise",NOW()),
+("Wizard of Oz",NOW()),("Kill Bill",NOW()),("Jaws",NOW());

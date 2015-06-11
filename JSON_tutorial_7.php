@@ -8,6 +8,7 @@ div#databox {
 	border:#CCC 1px solid;
 	width:550px;
 	height:310px;
+        margin-top: 20px;
 }
 </style>
 <script>
@@ -33,15 +34,17 @@ function ajax_json_data(){
     }
     hr.send("limit=4");
     databox.innerHTML = "requesting...";
-	myTimer = setTimeout('ajax_json_data()',6000);
+	myTimer = setTimeout('ajax_json_data()',36000);
 }
 </script>
 </head>
 <body>
 <h2>Timed JSON Data Request Random Items Script</h2>
+
+
 <?php
 require('../connect_db.php');
-$q = 'SELECT * FROM lesson7';
+$q = 'SELECT title FROM lesson7';
 $r = mysqli_query($dbc,$q);
 
 if($r) {
@@ -56,6 +59,26 @@ else{
     echo '<p>'.mysqli_error($dbc).'</p>';
 }
 ?>
+
+//<?php
+//require('connect_db.php');
+//$q = 'SELECT title FROM lesson7';
+//$r = mysql_query($sqlString) or die (mysql_error()); 
+//
+//if($r) {
+//    echo '<h3>Using older mysql query NOT mysqli to test</h3>';
+//    while ($row = mysql_fetch_array($r)){
+//        echo'<br>'.$row['id'].'____'.$row['title'].'___'.$row['cd'];
+//    }
+//}
+//else{
+//    echo '<p>'.mysql_error($dbc).'</p>';
+//    echo "something went wrong ---";
+//}
+//?>
+
+
+
 <div id="databox"></div>
 <div id="arbitrarybox"></div>
 <script>ajax_json_data();</script>

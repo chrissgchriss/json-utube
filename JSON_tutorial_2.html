@@ -1,39 +1,28 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-    <title>Json Testing tutorial 2</title>
-</head>
-<script type="text/javascript">
-function ajax_get_json() {
-    // always start off with your variables for the function
+<script>
+function ajax_get_json(){
+	var results = document.getElementById("results");
     var hr = new XMLHttpRequest();
-    //var results = document.getElementByID("results");
-    
-    hr.open("GET","mylist.json", true);
-    hr.setRequestHeader("Content-type","application/json", true);
+    hr.open("GET", "mylist.json", true);
+    hr.setRequestHeader("Content-type", "application/json", true);
     hr.onreadystatechange = function() {
-        if (hr.readyState == 4 && hr.status == 200) {
-            //var return_data
-            //var data = hr.responseText;
-            //to get it ready for json
-            var data = JSON.parse(hr.responseText);
-            var results = document.getElementById("results");
-            results.innerHTML = data.user;
-        }
+	    if(hr.readyState == 4 && hr.status == 200) {
+		    var data = JSON.parse(hr.responseText);
+			results.innerHTML = "";
+			for(var obj in data){
+				results.innerHTML += data[obj].user+" is "+data[obj].age+" and lives in "+data[obj].country+"<hr />";
+			}
+	    }
     }
     hr.send(null);
-    //document.getElementById("results").innerHTML = "processing some monkey code ...";
-    //because we created a var results = document.getElementByID("results"), we can refer it by the var
-    results.innerHTML = "processing some monkey monkey code!!!";
+    results.innerHTML = "requesting...";
 }
 </script>
+</head>
 <body>
-<!-- retrieve Database information, return it to Javascript application as JSON encoded format -->
-<!-- but first, make JSON -->
-<!-- learning to parse JSON data and create JSON objects -->
-<p style="margin-top: 100px;">This is now a branch named tutorial222</p>
 <div id="results"></div>
-<script type="text/javascript">ajax_get_json();</script>
+<script>ajax_get_json();</script>
 </body>
 </html>

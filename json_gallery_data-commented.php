@@ -207,3 +207,21 @@ echo $jsonData;
             <script type="text/javascript">ajax_json_data();</script>
         </body>
     </html>
+    
+    
+    
+    
+    
+    
+<?php
+header("Content-Type: application/json");
+
+$jsonData = '{';
+
+$jsonData .= '"article1":{ "id":"5","title":"45454", "cd":"2323" },';
+$jsonData .= '"article2":{ "id":"6","title":"45345", "cd":"1111" },';
+
+$jsonData = chop($jsonData, ",");
+$jsonData .= '}';
+echo $jsonData;
+?>

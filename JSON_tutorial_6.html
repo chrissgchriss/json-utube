@@ -7,15 +7,12 @@ div#pagetop { position:fixed; background: #333; padding:20px; font-size:36px; wi
 div#thumbnailbox { float:left; margin-top:82px; width:120px; background:#292929; }
 div#thumbnailbox > div { width:100px; height:80px; overflow:hidden; margin:10px; cursor:pointer; }
 div#thumbnailbox > div > img { width:100px; }
-/*div#pictureframe { position:fixed; left:140px; top:100px; width:700px; height:500px; }*/
 div#pictureframe { position:fixed; left:140px; top:100px; width:700px; text-align:center; }
 div#pictureframe > img { max-width:700px; }
-div#albummenubox {position:fixed; left:856px; top:100px; width:200px; background:#CCC; padding:12px; color:#000;
-border-radius:10px; }
+div#albummenubox { position:fixed; left:856px; top:100px; width:200px; background:#CCC; padding:12px; color:#000; border-radius: 10px; }
 </style>
 <script>
 function ajax_json_gallery(folder){
-	//document.getElementById("pagetop").innerHTML = "Dynamic JSON Ajax PHP Driven Image Gallery";
 	var thumbnailbox = document.getElementById("thumbnailbox");
 	var pictureframe = document.getElementById("pictureframe");
     var hr = new XMLHttpRequest();
@@ -47,11 +44,11 @@ function putinframe(src){
 <div id="thumbnailbox"></div>
 <div id="pictureframe"></div>
 <div id="albummenubox">
-    <h3>My Photo Albums</h3>
-    <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery1')">Gallery 1</a><br>
-    <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery2')">Gallery 2</a><br>
-    <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery3')">Gallery 3</a><br>
+  <h3>My Photo Albums</h3>
+  <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery1')">Gallery 1</a><br>
+  <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery2')">Gallery 2</a><br>
+  <a href="#" onclick="return false" onmousedown="ajax_json_gallery('gallery3')">Gallery 3</a><br>
 </div>
-<script type="text/javascript">ajax_json_gallery('gallery1');</script>
+<script>ajax_json_gallery('gallery1');</script>
 </body>
 </html>

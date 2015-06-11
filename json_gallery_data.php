@@ -3,12 +3,10 @@ header("Content-Type: application/json");
 $folder = $_POST["folder"];
 $jsonData = '{';
 $dir = $folder."/";
-//$dir = gallery2."/";
 $dirHandle = opendir($dir); 
 $i = 0;
 while ($file = readdir($dirHandle)) {
-	//if(!is_dir($file) && strpos($file, '.JPG')){
-        if(!is_dir($file) && preg_match("/.jpg|.gif|.png/i", $file)){
+	if(!is_dir($file) && preg_match("/.jpg|.gif|.png/i", $file)){
 		$i++;
 		$src = "$dir$file";
 $jsonData .= '"img'.$i.'":{ "num":"'.$i.'","src":"'.$src.'", "name":"'.$file.'" },';
